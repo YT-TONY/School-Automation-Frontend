@@ -1,16 +1,55 @@
 // src/types/schema.ts
+
 export type AcademicTerm = 'FIRST' | 'SECOND' | 'THIRD';
+
+export type UserRole =
+  | 'SUPER_ADMIN'
+  | 'SCHOOL_ADMIN'
+  | 'PRINCIPAL'
+  | 'VICE_PRINCIPAL_ACADEMIC'
+  | 'VICE_PRINCIPAL_ADMIN'
+  | 'TEACHER'
+  | 'FORM_TEACHER'
+  | 'STUDENT'
+  | 'PARENT';
+
+export interface UserProfile {
+  id: string;
+  school_id?: string | null;
+  email: string;
+  full_name: string;
+  role: UserRole;
+  is_active: boolean;
+  is_exam_officer?: boolean;
+  is_class_teacher?: boolean;
+}
 
 export interface StudentProfile {
   id: string;
+  school_id?: string;
   admission_number: string;
   first_name: string;
   last_name: string;
+  middle_name?: string | null;
+  full_name?: string;
+  class_arm_id?: string | null;
   class_name: string;
+  gender?: 'MALE' | 'FEMALE';
   photo_url?: string | null;
   parent_phone?: string | null;
   parent_email?: string | null;
-  status: string;
+  status: 'ACTIVE' | 'GRADUATED' | 'WITHDRAWN' | string;
+}
+
+export interface CreateStudentPayload {
+  admission_number: string;
+  first_name: string;
+  last_name: string;
+  middle_name?: string;
+  class_arm_id?: string;
+  gender?: 'MALE' | 'FEMALE';
+  parent_phone?: string;
+  parent_email?: string;
 }
 
 export interface SubjectResult {
